@@ -36,7 +36,7 @@ func (s *Server) Load() error {
 		}
 
 		// New client
-		newClient := client.NewClient(len(client.Clients)+1, newConn)
+		newClient := client.NewClient(newConn)
 
 		log.Printf("New connection: %d, Total connection: %d", newClient.Id, len(client.Clients))
 		// Listen client activity

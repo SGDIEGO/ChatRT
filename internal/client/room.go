@@ -10,9 +10,10 @@ type Room struct {
 var Rooms []*Room
 
 func NewRoom(name_ string) *Room {
-	var newRoom *Room
-	newRoom.id = len(Rooms) + 1
-	newRoom.name = name_
+	var newRoom = &Room{
+		id:   len(Rooms) + 1,
+		name: name_,
+	}
 
 	Rooms = append(Rooms, newRoom)
 
@@ -21,4 +22,10 @@ func NewRoom(name_ string) *Room {
 
 func (r *Room) addClient(client *Client) {
 	r.clients = append(r.clients, client)
+}
+
+func (r *Room) sendMessage(message string) {
+	for _, client := range r.clients {
+		client.Write(message)
+	}
 }
